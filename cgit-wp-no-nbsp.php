@@ -15,17 +15,13 @@ License: MIT
 /**
  * Remove empty paragraphs on output
  */
-function cgit_no_nbsp($content) {
+add_filter('the_content', function($content) {
     return preg_replace('/<p>(&nbsp;)*<\/p>/i', '', $content);
-}
-
-add_filter('the_content', 'cgit_no_nbsp');
+});
 
 /**
  * Remove empty paragraphs on save
  */
-function cgit_no_nbsp_editor($content) {
+add_filter('content_save_pre', function($content) {
     return preg_replace('/^(&nbsp;)+\r?$/im', '', $content);
-}
-
-add_filter('content_save_pre', 'cgit_no_nbsp_editor');
+});
